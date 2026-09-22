@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<!--
+  ═══════════════════════════════════════════════════════════
+  陈思怡 · 个人主页 —— 维护指南（改内容前先读这里）
+  ═══════════════════════════════════════════════════════════
+  1. 日常加内容（信息卡 / 经历 / 项目 / 技能 / 学习记录 / 作品）
+     全部改本文件最底部的 SITE_DATA 数据块，往对应数组里加一条
+     对象即可，页面会自动渲染，不用动任何 HTML 结构。
+     · 信息卡   → facts         · 经历   → timeline
+     · 项目     → projects      · 技能   → skills
+     · 学习记录 → records      · 作品   → works
+  2. 换头像：把新照片覆盖保存为 assets/avatar.jpg。
+  3. 改样式：styles.css；改交互：app.js；
+     渲染逻辑：render.js（基础内容）/ works-render.js（作品区）。
+  4. 改完先自检：node tools/check-page.mjs
+     再提交发布：git add -A && git commit -m "描述" && git push
+     GitHub Actions 会自动检查并发布到 Pages。
+  ═══════════════════════════════════════════════════════════
+-->
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -8,7 +26,8 @@
   <title>我的个人主页</title>
   <link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
   <link href="styles.css" rel="stylesheet"/>
-  <script src="works-data.js" defer></script>
+  <!-- 渲染脚本按顺序加载：先基础内容，再作品区，最后交互 -->
+  <script src="render.js" defer></script>
   <script src="works-render.js" defer></script>
   <script src="app.js" defer></script>
  </head>
@@ -30,7 +49,7 @@
   </header>
 
   <main id="main">
-   <!-- ===== 首屏：姓名 + 头像 ===== -->
+   <!-- ===== 首屏：姓名 + 头像（个性化区，直接改这里） ===== -->
    <section class="hero" id="about">
     <div class="container hero-grid">
      <div class="hero-copy">
@@ -54,113 +73,45 @@
     <a aria-label="滚动到经历栏目" class="scroll-hint" href="#experience">↓</a>
    </section>
 
-   <!-- ===== 快速一览 ===== -->
+   <!-- ===== 快速一览：内容来自底部 SITE_DATA.facts ===== -->
    <section class="facts" aria-label="基本信息一览">
-    <div class="container facts-grid">
-     <div class="fact-card">
-      <span class="fact-label">学校</span>
-      <strong>广东科学技术职业学院</strong>
-     </div>
-     <div class="fact-card">
-      <span class="fact-label">阶段</span>
-      <strong>2025–2028 在校</strong>
-     </div>
-     <div class="fact-card">
-      <span class="fact-label">城市</span>
-      <strong>广东珠海</strong>
-     </div>
-     <div class="fact-card">
-      <span class="fact-label">兴趣</span>
-      <strong>看剧 / 羽毛球</strong>
-     </div>
-    </div>
+    <div class="container facts-grid"></div>
    </section>
 
-   <!-- ===== 经历 ===== -->
+   <!-- ===== 经历：内容来自底部 SITE_DATA.timeline ===== -->
    <section class="section" id="experience">
     <div class="container">
      <header class="section-heading">
       <h2>经历</h2>
       <p>一段正在书写的履历。</p>
      </header>
-     <div class="timeline">
-      <div class="timeline-row">
-       <time class="timeline-time">2025–2028</time>
-       <span class="timeline-axis" aria-hidden="true"></span>
-       <div class="timeline-body">
-        <h3>广东科学技术职业学院 · 软件技术专业</h3>
-        <p>学习网页开发，用项目记录成长。</p>
-       </div>
-      </div>
-     </div>
+     <div class="timeline"></div>
     </div>
    </section>
 
-   <!-- ===== 项目 ===== -->
+   <!-- ===== 项目：内容来自底部 SITE_DATA.projects ===== -->
    <section class="section" id="projects">
     <div class="container">
      <header class="section-heading">
       <h2>项目</h2>
       <p>课堂之外，也在练习。</p>
      </header>
-     <div class="project-grid">
-      <article class="project-card">
-       <span class="project-badge">竞赛</span>
-       <h3>软件杯 · 大湾区学界海洋科技应用个案挑战赛</h3>
-       <p>参与软件杯大湾区学界海洋科技应用个案挑战赛，积累团队协作与项目实践经验。</p>
-      </article>
-      <article class="project-card">
-       <span class="project-badge">课程练习</span>
-       <h3>个人主页</h3>
-       <p>制作自己的网页，展示资料与作品，记录修改、测试与发布过程。</p>
-      </article>
-     </div>
+     <div class="project-grid"></div>
     </div>
    </section>
 
-   <!-- ===== 技能 ===== -->
+   <!-- ===== 技能：内容来自底部 SITE_DATA.skills ===== -->
    <section class="section" id="skills">
     <div class="container">
      <header class="section-heading">
       <h2>技能</h2>
       <p>按目前的熟练程度分类。</p>
      </header>
-     <ul class="skill-grid">
-      <li class="skill-card level-solid">
-       <span class="skill-name">HTML5</span>
-       <span class="skill-desc">结构、图片、链接</span>
-       <span class="skill-level">熟练</span>
-      </li>
-      <li class="skill-card level-solid">
-       <span class="skill-name">CSS3</span>
-       <span class="skill-desc">字体、颜色、响应式布局</span>
-       <span class="skill-level">熟练</span>
-      </li>
-      <li class="skill-card level-growing">
-       <span class="skill-name">JavaScript</span>
-       <span class="skill-desc">交互、数据与事件</span>
-       <span class="skill-level">学习中</span>
-      </li>
-      <li class="skill-card level-growing">
-       <span class="skill-name">Git</span>
-       <span class="skill-desc">版本记录与协作</span>
-       <span class="skill-level">学习中</span>
-      </li>
-      <li class="skill-card level-growing">
-       <span class="skill-name">数据库</span>
-       <span class="skill-desc">数据存取基础</span>
-       <span class="skill-level">学习中</span>
-      </li>
-      <li class="skill-card level-done">
-       <span class="skill-name">网站部署</span>
-       <span class="skill-desc">CI/CD 自动检查与发布</span>
-       <span class="skill-level">已跑通</span>
-      </li>
-     </ul>
+     <ul class="skill-grid"></ul>
     </div>
    </section>
 
-   <!-- ===== 作品 ===== -->
+   <!-- ===== 作品：内容来自底部 SITE_DATA.works，由 works-render.js 渲染 ===== -->
    <section class="section" id="portfolio">
     <div class="container">
      <header class="section-heading">
@@ -175,18 +126,14 @@
     </div>
    </section>
 
-   <!-- ===== 学习记录 ===== -->
+   <!-- ===== 学习记录：内容来自底部 SITE_DATA.records ===== -->
    <section class="section" id="records">
     <div class="container">
      <header class="section-heading">
       <h2>学习记录</h2>
       <p>真实进度，不写口号。</p>
      </header>
-     <ol class="records-list">
-      <li><strong>完成第一张个人主页</strong><span>从零写出的第一版页面。</span></li>
-      <li><strong>配置自动检查与发布</strong><span>用 Git 和 GitHub Actions，push 即更新。</span></li>
-      <li><strong>参加软件杯竞赛</strong><span>第一次组队完成的赛事经历。</span></li>
-     </ol>
+     <ol class="records-list"></ol>
     </div>
    </section>
   </main>
@@ -201,5 +148,54 @@
     <span class="footer-note">© 2026 陈思怡 · 页面由 Git 持续部署</span>
    </div>
   </footer>
+
+  <script>
+   /* ═══════════════════════════════════════════════════════
+      站点内容数据 —— 日常维护只改这里
+      每个数组是一类内容，加一条对象 = 页面多一块内容。
+      改完保存并推送即可，页面会自动渲染。
+      ═══════════════════════════════════════════════════════ */
+   window.SITE_DATA = {
+    /* 首屏信息卡：label = 小标题，value = 内容 */
+    facts: [
+     { label: '学校', value: '广东科学技术职业学院' },
+     { label: '阶段', value: '2025–2028 在校' },
+     { label: '城市', value: '广东珠海' },
+     { label: '兴趣', value: '看剧 / 羽毛球' }
+    ],
+    /* 经历时间轴：time = 时间，title = 标题，desc = 一句话说明 */
+    timeline: [
+     { time: '2025–2028', title: '广东科学技术职业学院 · 软件技术专业', desc: '学习网页开发，用项目记录成长。' }
+    ],
+    /* 项目：badge = 角标，title = 名称，desc = 说明 */
+    projects: [
+     { badge: '竞赛', title: '软件杯 · 大湾区学界海洋科技应用个案挑战赛', desc: '参与软件杯大湾区学界海洋科技应用个案挑战赛，积累团队协作与项目实践经验。' },
+     { badge: '课程练习', title: '个人主页', desc: '制作自己的网页，展示资料与作品，记录修改、测试与发布过程。' }
+    ],
+    /* 技能：name = 技能，desc = 说明，level = 熟练程度（熟练 / 学习中 / 已跑通，颜色自动匹配） */
+    skills: [
+     { name: 'HTML5', desc: '结构、图片、链接', level: '熟练' },
+     { name: 'CSS3', desc: '字体、颜色、响应式布局', level: '熟练' },
+     { name: 'JavaScript', desc: '交互、数据与事件', level: '学习中' },
+     { name: 'Git', desc: '版本记录与协作', level: '学习中' },
+     { name: '数据库', desc: '数据存取基础', level: '学习中' },
+     { name: '网站部署', desc: 'CI/CD 自动检查与发布', level: '已跑通' }
+    ],
+    /* 学习记录：title = 标题，desc = 说明 */
+    records: [
+     { title: '完成第一张个人主页', desc: '从零写出的第一版页面。' },
+     { title: '配置自动检查与发布', desc: '用 Git 和 GitHub Actions，push 即更新。' },
+     { title: '参加软件杯竞赛', desc: '第一次组队完成的赛事经历。' }
+    ],
+    /* 作品：title = 标题，description = 简介，image = 封面图（放 assets/），
+       url = 作品地址，year = 年份，tags = 标签（用于筛选） */
+    works: [
+     { title: '长风成卷 · 博客应用', description: '文章展示、接口与数据库。', image: 'assets/work-blog.png', url: 'https://ffd-p2-blog.netlify.app/', year: 2026, tags: ['前端', '后端', '数据库'] },
+     { title: '群像云图 · 社区应用', description: '内容发布与社区互动。', image: 'assets/work-community.png', url: 'https://ffd-p3-community.netlify.app/', year: 2026, tags: ['前端', '数据库', '部署'] },
+     { title: '一笺心意 · 祝福卡片', description: '卡片制作与作品分享。', image: 'assets/work-greeting-card.png', url: 'https://ffd-p4-greeting-card.netlify.app/', year: 2025, tags: ['前端', 'AI'] },
+     { title: '星声音乐站 · 音乐应用', description: '网页音频与交互实践。', image: 'assets/work-music-station.png', url: 'https://ffd-p5-music-station.netlify.app/', year: 2025, tags: ['前端', '测试'] }
+    ]
+   }
+  </script>
  </body>
 </html>
