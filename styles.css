@@ -643,3 +643,231 @@ footer {
     transform: none;
   }
 }
+
+/* ============================================================
+   趣味小设计
+   一批克制的小巧思：入场序列、格纹徽章、呼吸光晕、
+   标题滑线、脉动圆点、卡片 hover、返回顶部进度环。
+   ============================================================ */
+
+/* 选中文字：深蓝底白字 */
+::selection { background: var(--primary); color: #fff; }
+
+/* 首屏入场序列（纯 CSS，页面加载时依次落下） */
+.hero-copy h1,
+.hero-role,
+.hero-note,
+.hero-chips,
+.contact-link,
+.hero-visual {
+  animation: hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-copy h1 { animation-delay: 0.05s; }
+.hero-role { animation-delay: 0.16s; }
+.hero-note { animation-delay: 0.26s; }
+.hero-chips { animation-delay: 0.36s; }
+.contact-link { animation-delay: 0.46s; }
+.hero-visual { animation-delay: 0.56s; }
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 头像：呼吸光晕 + 背后蓝调 */
+.hero-visual {
+  --avatar-size: min(320px, 72vw);
+}
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  margin-left: calc(var(--avatar-size) * -0.5);
+  border-radius: 48% 48% 16px 16px;
+  background: radial-gradient(circle at 32% 24%, rgba(142, 203, 242, 0.55), rgba(142, 203, 242, 0) 62%);
+  animation: halo-breathe 6s ease-in-out infinite;
+  z-index: 0;
+}
+.hero-visual img { position: relative; z-index: 1; }
+@keyframes halo-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.05); opacity: 0.95; }
+}
+
+/* 格纹小徽章（呼应校服格纹领带） */
+.plaid {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  background:
+    linear-gradient(90deg, rgba(47, 127, 224, 0.16) 1px, transparent 1px),
+    linear-gradient(rgba(47, 127, 224, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.95) 2px, transparent 2px),
+    linear-gradient(rgba(255, 255, 255, 0.95) 2px, transparent 2px),
+    var(--wash);
+  background-size: 16px 16px, 16px 16px, 4px 4px, 4px 4px;
+  box-shadow: var(--shadow);
+  animation: plaid-float 6s ease-in-out infinite;
+  z-index: 0;
+}
+@keyframes plaid-float {
+  0%, 100% { transform: rotate(8deg) translateY(0); }
+  50% { transform: rotate(11deg) translateY(-8px); }
+}
+
+/* 往下看的滚动提示 */
+.hero { position: relative; }
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  text-decoration: none;
+  padding: 6px;
+  border-radius: 999px;
+  animation: hint-bounce 2.2s ease-in-out infinite;
+  z-index: 1;
+}
+.scroll-hint:hover { color: var(--accent); }
+@keyframes hint-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.65; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 1; }
+}
+
+/* 栏目标题：进入视野时滑出渐变下划线 */
+.section-heading h2 {
+  position: relative;
+  padding-bottom: 10px;
+}
+.section-heading h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 0;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+  transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.js .section .section-heading.is-visible h2::after { width: 46px; }
+
+/* 经历时间轴：圆点脉动光圈 */
+.timeline-axis::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  animation: axis-pulse 2.6s ease-out infinite;
+}
+@keyframes axis-pulse {
+  0% { transform: scale(0.55); opacity: 0.75; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* 信息卡：hover 上浮 + 顶部色条展开 */
+.fact-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.fact-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.fact-card:hover::before { transform: scaleX(1); }
+.fact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(29, 78, 137, 0.12);
+}
+
+/* 技能卡：hover 泛起淡蓝洗色 */
+.skill-card {
+  position: relative;
+  overflow: hidden;
+}
+.skill-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--wash);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.skill-card:hover::before { opacity: 0.5; }
+.skill-card > * { position: relative; }
+
+/* 作品卡：hover 图片放大 + 底部渐变 + 年份徽章上浮 */
+.work-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(29, 78, 137, 0.12), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.work-card:hover::after { opacity: 1; }
+.work-cover img { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.work-card:hover .work-cover img { transform: scale(1.06); }
+.work-year { transition: transform 0.3s ease, background-color 0.3s ease; }
+.work-card:hover .work-year { transform: translateY(-2px); background-color: var(--primary); }
+
+/* 返回顶部：进度圆环 */
+.to-top svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ring-bg,
+.ring-fg {
+  fill: none;
+  stroke-width: 2.4;
+}
+.ring-bg { stroke: var(--line); }
+.ring-fg {
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-dasharray: 100.53;
+  stroke-dashoffset: 100.53;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+.to-top-arrow {
+  position: relative;
+  z-index: 1;
+}
+.to-top:hover .ring-fg { stroke: var(--cyan); }
+
+/* 小屏适配 */
+@media (max-width: 860px) {
+  .hero-visual { --avatar-size: min(240px, 60vw); }
+  .plaid { width: 58px; height: 58px; border-radius: 16px; }
+  .scroll-hint { bottom: 4px; }
+}

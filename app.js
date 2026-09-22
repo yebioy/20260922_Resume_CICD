@@ -9,6 +9,8 @@ document.documentElement.classList.add('js')
 const progressBar = document.querySelector('#reading-progress')
 const indicator = document.querySelector('#section-indicator')
 const toTopButton = document.querySelector('#to-top')
+const ringFg = document.querySelector('.ring-fg')
+const RING_LEN = 100.53 // 2π × 16，返回顶部圆环周长
 const navLinks = document.querySelectorAll('nav a')
 const sections = document.querySelectorAll('main .hero[id], main section[id]')
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -24,6 +26,7 @@ function updateProgress() {
   const scrollable = document.documentElement.scrollHeight - window.innerHeight
   const ratio = scrollable > 0 ? window.scrollY / scrollable : 0
   progressBar.style.width = `${ratio * 100}%`
+  if (ringFg) ringFg.style.strokeDashoffset = `${RING_LEN * (1 - ratio)}`
 }
 
 // ---------- 当前栏目：右下角徽标 + 导航高亮 ----------
