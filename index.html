@@ -4,352 +4,199 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="noindex, nofollow" name="robots"/>
-  <meta content="课程练习：个人介绍、技能与作品门户。" name="description"/>
-  <title>
-   我的个人主页
-  </title>
+  <meta content="陈思怡的个人主页：软件技术专业学生，前端开发学习者。" name="description"/>
+  <title>陈思怡 · 个人主页</title>
   <link href="assets/favicon.svg" rel="icon" type="image/svg+xml"/>
-  <!-- CSS 负责颜色、字体、布局；defer 让 JavaScript 在 HTML 解析完成后执行。 -->
   <link href="styles.css" rel="stylesheet"/>
-   <script src="works-data.js" defer></script>
+  <script src="works-data.js" defer></script>
   <script src="works-render.js" defer></script>
   <script src="app.js" defer></script>
  </head>
  <body>
-  <a class="skip-link" href="#main">
-   跳到正文
-  </a>
-  <!-- 第 4 课新增①：顶部阅读进度条，宽度由 JavaScript 控制 -->
-  <div class="reading-progress" id="reading-progress">
-  </div>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <div class="reading-progress" id="reading-progress"></div>
+
   <header class="site-header">
    <div class="container header-inner">
-    <a class="brand" href="#about">
-     我的主页
-    </a>
-    <!-- href="#栏目ID" 是原生锚点：即使不加载 JavaScript，也能跳到对应栏目。 -->
+    <a class="brand" href="#about">陈思怡 <span>主页</span></a>
     <nav aria-label="主导航">
-     <a href="#about">
-      关于
-     </a>
-     <a href="#experience">
-      经历
-     </a>
-     <a href="#projects">
-      科研
-     </a>
-     <a href="#skills">
-      技能
-     </a>
-     <a href="#portfolio">
-      作品
-     </a>
-     <a href="#teaching">
-      教学
-     </a>
-     <a href="#publications">
-      成果
-     </a>
+     <a href="#experience">经历</a>
+     <a href="#projects">项目</a>
+     <a href="#skills">技能</a>
+     <a href="#portfolio">作品</a>
+     <a href="#records">记录</a>
     </nav>
    </div>
   </header>
+
   <main id="main">
-   <!-- HTML 练习：修改姓名、研究方向、照片路径和联系方式。 -->
+   <!-- ===== 首屏：姓名 + 头像 ===== -->
    <section class="hero" id="about">
-    <div class="container">
-     <div class="hero-top">
-      <div class="hero-copy">
-       <h1>
-       陈思怡
-        <span>
-         Lin
-        </span>
-       </h1>
-       <p class="hero-role">
-        软件技术专业学生 · 前端开发学习者
-       </p>
-       <p class="hero-school">
-        我的学校 · 我的班级
-       </p>
-      </div>
-      <div class="hero-visual">
-       <figure>
-        <img alt="个人头像占位图，请替换为自己的图片" height="220" src="assets/avatar.svg" width="220"/>
-       </figure>
-      </div>
+    <div class="container hero-grid">
+     <div class="hero-copy">
+      <h1>陈思怡 <span class="hero-en">Chen Siyi</span></h1>
+      <p class="hero-role"><span id="typewriter"></span><span class="caret">|</span></p>
+      <p class="hero-note">这个主页由 HTML、CSS 和一点 Git 构成，每次更新都会自动发布。</p>
+      <ul class="hero-chips">
+       <li>广东科学技术职业学院</li>
+       <li>2025–2028 在校</li>
+       <li>广东珠海</li>
+       <li>籍贯 广东普宁</li>
+      </ul>
+      <a class="contact-link" href="mailto:renran_86@qq.com">联系我：renran_86@qq.com</a>
      </div>
-     <div class="research-direction" id="research-direction">
-      <span class="eyebrow">
-       学习方向
-      </span>
-      <p>
-       HTML5、CSS3、JavaScript，正在学习 Git、数据库与网站部署。
-      </p>
+     <figure class="hero-visual">
+      <img alt="陈思怡的个人头像占位图，可替换为真实照片" height="400" id="avatar" src="assets/avatar.svg" width="400"/>
+      <figcaption class="hero-badge">软件技术专业 · 前端开发学习者</figcaption>
+     </figure>
+    </div>
+   </section>
+
+   <!-- ===== 快速一览 ===== -->
+   <section class="facts" aria-label="基本信息一览">
+    <div class="container facts-grid">
+     <div class="fact-card">
+      <span class="fact-label">学校</span>
+      <strong>广东科学技术职业学院</strong>
      </div>
-     <div class="profile-details">
-      <div>
-       <span>
-        学习阶段
-       </span>
-       <p>
-        在校学习
-       </p>
-      </div>
-      <div>
-       <span>
-        所在城市
-       </span>
-       <p>
-        珠海
-       </p>
-      </div>
-      <div>
-       <span>
-        联系
-       </span>
-       <p>
-        请填写可公开的联系方式
-       </p>
-      </div>
-      <div>
-       <span>
-        学校地址
-       </span>
-       <p>
-        请填写自己的学校地址
-       </p>
-      </div>
+     <div class="fact-card">
+      <span class="fact-label">阶段</span>
+      <strong>2025–2028 在校</strong>
+     </div>
+     <div class="fact-card">
+      <span class="fact-label">城市</span>
+      <strong>广东珠海</strong>
+     </div>
+     <div class="fact-card">
+      <span class="fact-label">兴趣</span>
+      <strong>看剧 / 羽毛球</strong>
      </div>
     </div>
    </section>
-   <!-- 每个栏目复用 section → container → 标题/内容 的结构，统一由 CSS 控制样式。 -->
+
+   <!-- ===== 经历 ===== -->
    <section class="section" id="experience">
     <div class="container">
      <header class="section-heading">
-      <h2>
-       教育与工作经历
-      </h2>
+      <h2>经历</h2>
+      <p>一段正在书写的履历。</p>
      </header>
-     <div class="section-content">
-      <!-- TASK-HTML：复制 experience-item 可增加一条自己的经历。 -->
-      <div class="experience-item">
-       <p class="experience-heading">
-        <strong>
-         我的学校 · 软件技术专业
-        </strong>
-        <time>
-         在读
-        </time>
-       </p>
-       <p class="experience-detail">
-        学习网页开发，用项目记录成长。
-       </p>
+     <div class="timeline">
+      <div class="timeline-row">
+       <time class="timeline-time">2025–2028</time>
+       <span class="timeline-axis" aria-hidden="true"></span>
+       <div class="timeline-body">
+        <h3>广东科学技术职业学院 · 软件技术专业</h3>
+        <p>学习网页开发，用项目记录成长。</p>
+       </div>
       </div>
      </div>
     </div>
    </section>
+
+   <!-- ===== 项目 ===== -->
    <section class="section" id="projects">
     <div class="container">
      <header class="section-heading">
-      <h2>
-       项目经历
-      </h2>
+      <h2>项目</h2>
+      <p>课堂之外，也在练习。</p>
      </header>
-     <div class="section-content">
-      <article class="research-item">
-       <h3>
-        <time>
-         课程练习
-        </time>
-        个人主页
-       </h3>
-       <p>
-        项目内容：制作自己的网页，展示资料与作品，记录修改、测试与发布过程。
-       </p>
+     <div class="project-grid">
+      <article class="project-card">
+       <span class="project-badge">竞赛</span>
+       <h3>软件杯 · 大湾区学界海洋科技应用个案挑战赛</h3>
+       <p>参与软件杯大湾区学界海洋科技应用个案挑战赛，积累团队协作与项目实践经验。</p>
+      </article>
+      <article class="project-card">
+       <span class="project-badge">课程练习</span>
+       <h3>个人主页</h3>
+       <p>制作自己的网页，展示资料与作品，记录修改、测试与发布过程。</p>
       </article>
      </div>
     </div>
    </section>
+
+   <!-- ===== 技能 ===== -->
    <section class="section" id="skills">
     <div class="container">
      <header class="section-heading">
-      <h2>
-       技能与实践
-      </h2>
+      <h2>技能</h2>
+      <p>按目前的熟练程度分类。</p>
      </header>
-     <div class="section-content">
-      <ul class="skills-list">
-       <li>
-        <strong>
-         网页内容
-        </strong>
-        HTML5 结构、图片、链接。
-       </li>
-       <li>
-        <strong>
-         页面样式
-        </strong>
-        CSS3 字体、颜色、响应式布局。
-       </li>
-       <li>
-        <strong>
-         开发过程
-        </strong>
-        JavaScript、Git、检查与部署。
-       </li>
-      </ul>
-     </div>
+     <ul class="skill-grid">
+      <li class="skill-card level-solid">
+       <span class="skill-name">HTML5</span>
+       <span class="skill-desc">结构、图片、链接</span>
+       <span class="skill-level">熟练</span>
+      </li>
+      <li class="skill-card level-solid">
+       <span class="skill-name">CSS3</span>
+       <span class="skill-desc">字体、颜色、响应式布局</span>
+       <span class="skill-level">熟练</span>
+      </li>
+      <li class="skill-card level-growing">
+       <span class="skill-name">JavaScript</span>
+       <span class="skill-desc">交互、数据与事件</span>
+       <span class="skill-level">学习中</span>
+      </li>
+      <li class="skill-card level-growing">
+       <span class="skill-name">Git</span>
+       <span class="skill-desc">版本记录与协作</span>
+       <span class="skill-level">学习中</span>
+      </li>
+      <li class="skill-card level-growing">
+       <span class="skill-name">数据库</span>
+       <span class="skill-desc">数据存取基础</span>
+       <span class="skill-level">学习中</span>
+      </li>
+      <li class="skill-card level-done">
+       <span class="skill-name">网站部署</span>
+       <span class="skill-desc">CI/CD 自动检查与发布</span>
+       <span class="skill-level">已跑通</span>
+      </li>
+     </ul>
     </div>
    </section>
+
+   <!-- ===== 作品 ===== -->
    <section class="section" id="portfolio">
     <div class="container">
      <header class="section-heading">
-      <h2>
-       作品门户
-      </h2>
-      <p class="works-notice">
-       以下为教学示例，完成后可替换为自己的作品。
-      </p>
+      <h2>作品</h2>
+      <p>做过的东西，都放在这里。</p>
      </header>
-     <!-- 第 5 课新增：筛选与排序工具条。里面的按钮由 JavaScript 生成，
-          不写 JS 时这里是空的，页面照常显示全部作品。 -->
      <div class="works-toolbar">
-      <div class="works-tags" id="works-tags">
-      </div>
-      <button class="works-sort" id="works-sort" type="button">
-       按年份：新→旧
-      </button>
+      <div class="works-tags" id="works-tags"></div>
+      <button class="works-sort" id="works-sort" type="button">按年份：新→旧</button>
      </div>
-     <ol class="portfolio-list">
-      <li class="work-card work-blog">
-       <a href="https://ffd-p2-blog.netlify.app/" rel="noopener noreferrer" target="_blank">
-        <div class="work-cover">
-         <img alt="长风成卷 · 博客应用的实际网页截图" decoding="async" height="800" src="assets/work-blog.png" width="1200"/>
-        </div>
-        <div class="work-copy">
-         <h3>
-          长风成卷 · 博客应用
-         </h3>
-         <p>
-          文章展示、接口与数据库。
-         </p>
-        </div>
-       </a>
-      </li>
-      <li class="work-card work-community">
-       <a href="https://ffd-p3-community.netlify.app/" rel="noopener noreferrer" target="_blank">
-        <div class="work-cover">
-         <img alt="群像云图 · 社区应用的实际网页截图" decoding="async" height="800" src="assets/work-community.png" width="1200"/>
-        </div>
-        <div class="work-copy">
-         <h3>
-          群像云图 · 社区应用
-         </h3>
-         <p>
-          内容发布与社区互动。
-         </p>
-        </div>
-       </a>
-      </li>
-      <li class="work-card work-greeting-card">
-       <a href="https://ffd-p4-greeting-card.netlify.app/" rel="noopener noreferrer" target="_blank">
-        <div class="work-cover">
-         <img alt="一笺心意 · 祝福卡片的实际网页截图" decoding="async" height="800" src="assets/work-greeting-card.png" width="1200"/>
-        </div>
-        <div class="work-copy">
-         <h3>
-          一笺心意 · 祝福卡片
-         </h3>
-         <p>
-          卡片制作与作品分享。
-         </p>
-        </div>
-       </a>
-      </li>
-      <li class="work-card work-music-station">
-       <a href="https://ffd-p5-music-station.netlify.app/" rel="noopener noreferrer" target="_blank">
-        <div class="work-cover">
-         <img alt="星声音乐站 · 音乐应用的实际网页截图" decoding="async" height="800" src="assets/work-music-station.png" width="1200"/>
-        </div>
-        <div class="work-copy">
-         <h3>
-          星声音乐站 · 音乐应用
-         </h3>
-         <p>
-          网页音频与交互实践。
-         </p>
-        </div>
-       </a>
-      </li>
+     <ol class="portfolio-list"></ol>
+    </div>
+   </section>
+
+   <!-- ===== 学习记录 ===== -->
+   <section class="section" id="records">
+    <div class="container">
+     <header class="section-heading">
+      <h2>学习记录</h2>
+      <p>真实进度，不写口号。</p>
+     </header>
+     <ol class="records-list">
+      <li><strong>完成第一张个人主页</strong><span>从零写出的第一版页面。</span></li>
+      <li><strong>配置自动检查与发布</strong><span>用 Git 和 GitHub Actions，push 即更新。</span></li>
+      <li><strong>参加软件杯竞赛</strong><span>第一次组队完成的赛事经历。</span></li>
      </ol>
     </div>
    </section>
-   <section class="section" id="teaching">
-    <div class="container">
-     <header class="section-heading">
-      <h2>
-       学习与实践
-      </h2>
-     </header>
-     <div class="section-content">
-      <div class="teaching-group">
-       <h3>
-        本学期目标
-       </h3>
-       <ol>
-        <li>
-         每次课完成一个可运行的小改动。
-        </li>
-        <li>
-         能解释自己修改的 HTML、CSS 和 JavaScript。
-        </li>
-        <li>
-         使用 Git 记录版本，让作品能被别人访问。
-        </li>
-       </ol>
-      </div>
-     </div>
-    </div>
-   </section>
-   <section class="section" id="publications">
-    <div class="container">
-     <header class="section-heading">
-      <h2>
-       学习记录
-      </h2>
-     </header>
-     <div class="section-content">
-      <div class="publication-group">
-       <h3>
-        我的记录
-       </h3>
-       <ol class="references">
-        <li>
-         完成第一张个人主页。
-        </li>
-        <li>
-         后续在这里补充自己的真实成果。
-        </li>
-       </ol>
-      </div>
-     </div>
-    </div>
-   </section>
   </main>
-  <!-- 第 4 课新增：这两块由 JavaScript 控制，不写 JS 时它们不会出现 -->
-  <p aria-live="polite" class="section-indicator" id="section-indicator">
-  </p>
-  <button aria-label="返回页面顶部" class="to-top" id="to-top" type="button">
-   ↑
-  </button>
+
+  <p aria-live="polite" class="section-indicator" id="section-indicator"></p>
+  <button aria-label="返回页面顶部" class="to-top" id="to-top" type="button">↑</button>
+
   <footer>
    <div class="container footer-inner">
-    <a href="#about">
-     回到顶部
-    </a>
-    <a href="#portfolio">
-     作品门户
-    </a>
+    <a href="#about">回到顶部</a>
+    <a href="#portfolio">作品门户</a>
+    <span class="footer-note">© 2026 陈思怡 · 页面由 Git 持续部署</span>
    </div>
   </footer>
  </body>
